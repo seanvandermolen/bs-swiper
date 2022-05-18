@@ -88,13 +88,14 @@ Showing child-pages in parent-page is very useful to avoid empty parent-pages.
 ## WooCommerce Products
 
 ### Shortcode to show products
-`[bs-swiper-card-product category="shoes, trousers" order="DESC" orderby="date" posts="12"]`
+`[bs-swiper-card-product category="shoes, trousers" order="DESC" orderby="date" posts="12" featured="true"]`
 
 #### Options:
 - category: category slug, multiple categories separated by comma
 - order: ASC or DESC
 - orderby: date, title, or rand
-- posts: amount of products to show 
+- posts: amount of products to show
+- featured: query featured products if true
 
 ## Overriding templates via theme
 Template files can be found within the **/bs-swiper-main/templates/** plugin directory.
