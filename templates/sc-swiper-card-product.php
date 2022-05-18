@@ -10,7 +10,7 @@
  * @version     5.1.0.0
 
 Product Slider Shortcode
-[bs-swiper-card-product order="DESC" orderby="date" posts="12" category="theme, child-themes, free, plugins"]
+[bs-swiper-card-product order="DESC" orderby="date" posts="12" category="theme, child-themes, free, plugins" featured="true"]
 
 */
 
@@ -19,25 +19,30 @@ Product Slider Shortcode
 add_shortcode( 'bs-swiper-card-product', 'bootscore_product_slider' );
 function bootscore_product_slider( $atts ) {
 	
-  ob_start();
-	extract( shortcode_atts( array (
-		'type' => 'product',
-		'order' => 'date',
-		'orderby' => 'date',
-		'posts' => -1,
-		'category' => '',
-	), $atts ) );
-	
-    $options = array(
-		'order' => $order,
-		'orderby' => $orderby,
-		'posts_per_page' => $posts,
-        'product_cat'    => $category,
-	);
-	
-  $query = new WP_Query( $options );
-	if ( $query->have_posts() ) { ?>
+    ob_start();
+    extract( shortcode_atts( array (
+        'type' => 'product',
+        'order' => 'date',
+        'orderby' => 'date',
+        'posts' => -1,
+        'category' => '',
+        'featured' => '',
+    ), $atts ) );
 
+    if (str_contains($featured, 'true')) {
+        $postin  = wc_get_featured_product_ids() ;
+    } else { $postin = '' ; }
+
+    $options = array(
+        'order' => $order,
+        'orderby' => $orderby,
+        'posts_per_page' => $posts,
+        'product_cat'    => $category,
+        'post__in'  => $postin,
+    );
+
+    $query = new WP_Query( $options );
+    if ( $query->have_posts() ) { ?>
 
 <!-- Swiper -->
 
