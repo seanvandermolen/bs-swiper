@@ -29,7 +29,7 @@ function bootscore_product_slider( $atts ) {
         'featured' => '',
     ), $atts ) );
 
-    if (str_contains($featured, 'true')) {
+    if ( $featured === 'true') {
         $postin  = wc_get_featured_product_ids() ;
     } else { $postin = '' ; }
 
